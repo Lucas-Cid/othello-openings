@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 2020_02_23_200027) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "configurations", force: :cascade do |t|
     t.integer "response_time", default: 1
     t.integer "priority_level", default: 0
