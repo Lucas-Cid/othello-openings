@@ -35,7 +35,7 @@ class OpeningsController < ApplicationController
 
 
 	def getingImportatedOpeningName(params)
-		openingName = params.require(:path).split("/")
+		openingName = params.require(:path).to_s.split('/')
 		openingName[openingName.length-1]
 	end
 
@@ -69,6 +69,7 @@ class OpeningsController < ApplicationController
 
 
 	def importOpeningFile
+		params[:path] = Rails.root + params[:path]
 		@openings = Opening.new(name: getingImportatedOpeningName(params), 
 								move_sequence: getingImportatedOpeningMoveSequence(params), 
 								user_id: params.require(:user_id),
