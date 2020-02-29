@@ -23,7 +23,7 @@ class UsersController < ApplicationController
 	    				:username => userObject[:username],
 	    				:email => userObject[:email],
 	    				:password => userObject[:password],
-	    				:confimationToken => userObject[:confimationToken],
+	    				:confimationToken => userObject[:confirmationToken],
 	    				:emailConfirmated => userObject[:emailConfirmated]
 	    			}
 	    	format.json  { render :json => user }
