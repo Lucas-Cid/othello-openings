@@ -32,7 +32,12 @@ class OpeningsController < ApplicationController
 	    				:play_color => openingObject[:play_color]
 	    			  }
 	    	format.json  { render :json => opening }
- 	 		end
+ 	 	end
+	end
+
+	def update
+		permitedParamsOpenings = giveOpeningsParamsPermission(params)
+		Openings.find(params.require(:id)).update(permitedParamsOpenings)
 	end
 
 

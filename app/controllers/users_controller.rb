@@ -7,8 +7,8 @@ class UsersController < ApplicationController
 
 	def create
 		permitedParamsUsers = giveUsersParamsPermission(params)
-		@users = User.new(permitedParamsUsers)
-		@users.save
+		@user = User.new(permitedParamsUsers)
+		UserMailer.token_confirmation_email(@user).deliver_now
 	end
 
 
@@ -21,6 +21,8 @@ class UsersController < ApplicationController
 	    				:username => userObject[:username],
 	    				:email => userObject[:email],
 	    				:password => userObject[:password],
+	    				:confimationToken => userObject[:confimationToken],
+	    				:emailConfirmated => userObject[:emailConfirmated]
 	    			}
 	    	format.json  { render :json => user }
  	 	end
@@ -53,5 +55,10 @@ class UsersController < ApplicationController
   		end
 	end
 
-	
+	def emailConfirmation
+		if params[:confirmationToken] == User.find(params[:id])[:confirmationToken]
+			User.find(params[:id]).update(emailConfirmated:true)
+		end
+	end
+
 end
