@@ -8,7 +8,9 @@ class UsersController < ApplicationController
 	def create
 		permitedParamsUsers = giveUsersParamsPermission(params)
 		@user = User.new(permitedParamsUsers)
-		UserMailer.token_confirmation_email(@user).deliver_now
+		if @user.save
+			UserMailer.token_confirmation_email(@user).deliver_now
+		end
 	end
 
 
