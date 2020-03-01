@@ -9,10 +9,9 @@ class UsersController < ApplicationController
 		permitedParamsUsers = giveUsersParamsPermission(params)
 		@user = User.new(permitedParamsUsers)
 		if @user.save
-			UserMailer.token_confirmation_email(@user).deliver_now
+			UserMailer.token(@user).deliver_later!
 		end
 	end
-
 
 	def show
 		userObject = User.find(params.require(:id))
