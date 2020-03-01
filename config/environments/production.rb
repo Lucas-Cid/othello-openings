@@ -1,6 +1,14 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+config.action_mailer.smtp_settings = {
+  :user_name => 'lordlucas4',
+  :password => 'Lord_lucas4',
+  :address => 'smtp.sendgrid.net',
+  :port => 587,
+  :authentication => :plain,
+  :enable_starttls_auto => true
+}
   # Code is not reloaded between requests.
   config.cache_classes = true
 
